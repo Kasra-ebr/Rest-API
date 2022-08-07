@@ -12,14 +12,34 @@ const FullComment = ({commentId}) => {
                 const { data } = await axios.get(
                     ""
                 );
-                setComment(data.slice(0, 4));
-            } catch (error) {
-            }
+                setComment(data));
+            } catch (error) { }
         }
-    }
-       
-)
+    })
+
+const deleteHandler = async () => {
+    /*
+    axios
+    .delete("");
+    const {data} = await.axios.get("");
+    setcComments(data)
+    .catch(err)=> console.log(err)
+    */
+
+  
+  
+  try {
+         await axios.delete("");
+          const {data} = await axios.get("");
+          setComment(data);
+
+      } catch (error) {
+
+      }
+
+}
     
+
     if (!commentId) return  <p> please select a coment</p>;
     
     let commnetDetail = <p>please select a comment</p>; 
@@ -27,10 +47,11 @@ const FullComment = ({commentId}) => {
     if (commentId) commnetDetail = <p> loading</p>
     if (comment) {
         commnetDetail= (
-            <div>
+            <div className='fullComment'>
             <p>{comment.name}</p>
             <p>{comment.email}</p>
             <p>{comment.body}</p>
+            <button onClick={deleteHandler}></button>
         </div>
         )
 

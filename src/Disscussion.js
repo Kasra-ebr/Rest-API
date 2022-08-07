@@ -9,18 +9,19 @@ import './Disscusion.css';
 
 
 const Disscussion = () => {
-    const [comments, setComment] = useEffect(null);
+    const [comments, setComments] = useEffect(null);
     const [selectedid, setSelectedId] = useEffect(null);
+    const [error, setError] = useEffect(false)
 
     useEffect(()=> {
        const getComments = async () => {
         try {
-            const {data} = await axios.get(
+            const {data} = await axios.get( 
                 "" 
             )
-            setComment(data)
+            setComments(data)
         }catch (error) {
-
+            setError(error)
         }
        }
 
@@ -31,8 +32,9 @@ const Disscussion = () => {
         setSelectedId(id)
         console.log(id)
     }
+    
 
-
+     
 
 
         return (
@@ -44,10 +46,10 @@ const Disscussion = () => {
                    : <div> Loadfing page</div>}
             </section>
             <section>
-                     <FullComment commentId={setSelectedId}/>
+                     <FullComment commentId={setSelectedId} setComments={setComments}/>
             </section>
             <section>
-                    <NewComment/>
+                    <NewComment setComments={setComments}/>
             </section>
             
         </main>  
